@@ -20,10 +20,11 @@ public class playerController : MonoBehaviour {
 	}
 	void OnTriggerEnter(Collider other){ 
 		
-		if (other.gameObject.tag == "CrashTrigger") {
-			this.gameObject.SetActive (false);
+		//if (other.gameObject.tag == "CrashTrigger") {
+			
 			Instantiate (brokenPlane, this.transform.position, this.transform.rotation, null);
-		}
+			this.gameObject.SetActive (false);
+		//}
 	}
 }
 	

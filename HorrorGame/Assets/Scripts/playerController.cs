@@ -5,7 +5,7 @@ using UnityEngine;
 public class playerController : MonoBehaviour {
 
 	public float speed = 10f;
-	public float spinSpeed = 10f;
+	public Transform target;
 	public GameObject brokenPlane;
 	Rigidbody rb;
 	// Use this for initialization
@@ -15,26 +15,31 @@ public class playerController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		rb.AddForce (Vector3.forward * speed);
+		//rb.AddForce (Vector3.forward * speed);
 
-		if (Input.GetKey("left"))
+		if (Input.GetKey("a"))
 		{
-			transform.Rotate(Vector3.up * speed * Time.deltaTime);
+			transform.Rotate(Vector3.down * speed * Time.deltaTime, Space.World);
 		}
-		if (Input.GetKey("right"))
+		if (Input.GetKey("d"))
 		{
-			transform.Rotate(Vector3.down * speed * Time.deltaTime);
+			transform.Rotate(Vector3.up * speed * Time.deltaTime, Space.World);
 		}
-		if (Input.GetKey("up"))
+		if (Input.GetKey("w"))
 		{
 			transform.Rotate(Vector3.right * speed * Time.deltaTime);
-			rb.AddForce (Vector3.down * speed);
+
 		}
-		if (Input.GetKey("down"))
+		if (Input.GetKey("s"))
 		{
 			transform.Rotate(Vector3.left * speed * Time.deltaTime);
-			rb.AddForce (Vector3.up * speed);
+
 		}
+
+
+		float step = speed * Time.deltaTime;
+
+		transform.position = Vector3.MoveTowards (transform.position, target.position, step);
 
 
 	}
